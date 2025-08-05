@@ -1,11 +1,15 @@
 import express from "express";
 import cors from "cors";
 
- 
-const app = express();  
+const app = express();
 const PORT = 8000;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://intern-portal-crkd.vercel.app/",
+    methods: "GET",
+  })
+);
 app.use(express.json());
 
 import { getInternData } from "./intern.controller.js";
