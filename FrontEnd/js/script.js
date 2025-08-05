@@ -1,12 +1,19 @@
-if (window.location.pathname.includes("index.html")) {
-  document.getElementById("login-form").addEventListener("submit", function (e) {
-    e.preventDefault();
-    const email = document.getElementById("email").value;
+if (
+  window.location.pathname.includes("index.html") ||
+  window.location.pathname === "/"
+) {
+  document
+    .getElementById("login-form")
+    .addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
 
-    localStorage.setItem("internEmail", email);
+      if (email) {
+        localStorage.setItem("internEmail", email);
 
-    window.location.href = "dashboard.html";
-  });
+        window.location.href = "dashboard.html";
+      }
+    });
 }
 
 if (window.location.pathname.includes("dashboard.html")) {
@@ -15,7 +22,8 @@ if (window.location.pathname.includes("dashboard.html")) {
     .then((data) => {
       document.getElementById("intern-name").textContent = data.name;
       document.getElementById("referral-code").textContent = data.referralCode;
-      document.getElementById("donation-amount").textContent = data.totalDonations;
+      document.getElementById("donation-amount").textContent =
+        data.totalDonations;
     })
     .catch((err) => console.error("Error fetching intern data:", err));
 }
