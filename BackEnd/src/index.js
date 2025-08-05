@@ -6,7 +6,7 @@ const PORT = 8000;
 
 app.use(
   cors({
-    origin: "https://intern-portal-crkd.vercel.app",
+    origin: "https://intern-portal-q9xi.vercel.app/",
     methods: "GET",
   })
 );
@@ -23,3 +23,4 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(` Server running on http://localhost:${PORT}`);
 });
+ 
