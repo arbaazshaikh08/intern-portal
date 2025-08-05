@@ -1,29 +1,23 @@
-if (
-  window.location.pathname.includes("index.html") ||
-  window.location.pathname === "/"
-) {
-  document
-    .getElementById("login-form")
-    .addEventListener("submit", function (e) {
-      e.preventDefault();
-      const email = document.getElementById("email").value;
+document.addEventListener("DOMContentLoaded", () => {
+  const internList = document.getElementById("internList");
 
-      if (email) {
-        localStorage.setItem("internEmail", email);
-
-        window.location.href = "dashboard.html";
+  fetch("https://intern-portal-7tdk.onrender.com/api/intern")
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
       }
-    });
-}
-
-if (window.location.pathname.includes("dashboard.html")) {
-  fetch("https://intern-portal-7tdk.onrender.com")
-    .then((res) => res.json())
-    .then((data) => {
-      document.getElementById("intern-name").textContent = data.name;
-      document.getElementById("referral-code").textContent = data.referralCode;
-      document.getElementById("donation-amount").textContent =
-        data.totalDonations;
+      return res.json();
     })
-    .catch((err) => console.error("Error fetching intern data:", err));
-}
+    .then((data) => {
+      internList.innerHTML = "";
+      data.forEach((intern) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `👤 ${intern.name} (${intern.email}) - ${intern.bio || "No bio"}`;
+        internList.appendChild(listItem);
+      });
+    })
+    .catch((err) => {
+      console.error("Error fetching intern data:", err);
+      internList.textContent = "Failed to load intern data.";
+    });
+});
