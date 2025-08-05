@@ -4,10 +4,21 @@ import cors from "cors";
 const app = express();
 const PORT = 8000;
 
+const allowedOrigins = [
+  "https://intern-portal-q9xi.vercel.app",
+  "https://intern-portal-q9xi-gn6vz0fi7-arbaazshaikh08s-projects.vercel.app",
+];
+
 app.use(
   cors({
-    origin: "https://intern-portal-q9xi.vercel.app",
-    methods: "GET",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
   })
 );
 app.use(express.json());
