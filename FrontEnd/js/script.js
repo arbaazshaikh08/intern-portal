@@ -17,7 +17,7 @@ if (
 }
 
 if (window.location.pathname.includes("dashboard.html")) {
-  fetch("http://localhost:8000/api/intern")
+  fetch("https://intern-portal-7tdk.onrender.com")
     .then((res) => res.json())
     .then((data) => {
       document.getElementById("intern-name").textContent = data.name;
