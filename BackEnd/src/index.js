@@ -10,7 +10,7 @@ app.use(express.json());
 
 import { getInternData } from "./intern.controller.js";
 
-app.get("/", getInternData);
+app.get("/api/intern", getInternData);
 
 app.listen(PORT, () => {
   console.log(` Server running on http://localhost:${PORT}`);
