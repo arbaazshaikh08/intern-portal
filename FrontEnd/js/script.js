@@ -17,7 +17,7 @@ if (
 }
 
 if (window.location.pathname.includes("dashboard.html")) {
-  fetch("http://localhost:8000/")
+  fetch("http://localhost:8000/api/intern")
     .then((res) => res.json())
     .then((data) => {
       document.getElementById("intern-name").textContent = data.name;
