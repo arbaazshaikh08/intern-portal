@@ -6,7 +6,7 @@ const PORT = 8000;
 
 app.use(
   cors({
-    origin: "https://intern-portal-q9xi.vercel.app/",
+    origin: "https://intern-portal-q9xi.vercel.app",
     methods: "GET",
   })
 );
